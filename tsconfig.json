@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react",
+    "sourceMap": true,
+    "outDir": "./",
+    "strict": true
+  },
+    "include": [
+        "src/**/*.tsx"
+    ],
+    "exclude": [
+    ]
+}
