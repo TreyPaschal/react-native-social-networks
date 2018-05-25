@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AsyncStorage } from 'react-native';
-import { StackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
+import { StackNavigator, createBottomTabNavigator, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import PostsScreen from './screens/posts'
 import ExploreScreen from './screens/explore'
 import ProfileScreen from './screens/profile'
@@ -8,6 +8,7 @@ import SettingsScreen from './screens/settings'
 import MessagesScreen from './screens/messages'
 import LoginScreen from './screens/login'
 import AuthenticationScreen from './authentication'
+import { ImagePicker } from './components/image-picker'
 
 
 
@@ -31,9 +32,23 @@ const MainNavigator = createBottomTabNavigator({
     });
 
 
+const ModalNavigator = createStackNavigator(
+    {
+        Main: {
+            screen: MainNavigator,
+        },
+        XImagePicker: {
+            screen: ImagePicker,
+        },
+    },
+    {
+        headerMode: 'none',
+    }
+);
+
 const App = createSwitchNavigator(
     {
-        App: MainNavigator,
+        App: ModalNavigator,
         Auth: LoginScreen,
         Root: AuthenticationScreen,
     },

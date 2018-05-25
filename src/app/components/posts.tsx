@@ -128,25 +128,25 @@ class BodyExtraPhotoSingle extends React.Component {
 
 const PostRowExtraImagesSingle = (props: any) => (
     <View style={styles.postBodyExtra}>
-        {props.photos.map((item: string) => {
+        {props.photos.map((item: string, index: number) => {
             // return <View style={styles.postBodyExtraPhotoSingleFrame}><Image source={{ uri: item }} resizeMode='contain' style={styles.postBodyExtraPhotoSingle} /></View>
-            return <View style={styles.postBodyExtraPhotoSingleFrame}><BodyExtraPhotoSingle source={{ uri: item }} /></View>
+            return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><BodyExtraPhotoSingle source={{ uri: item }} /></View>
         })}
     </View>
 );
 
 const PostRowExtraImagesDouble = (props: any) => (
     <View style={styles.postBodyExtra}>
-        {props.photos.map((item: string) => {
-            return <View style={styles.postBodyExtraPhotoDoubleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
+        {props.photos.map((item: string, index: number) => {
+            return <View key={index} style={styles.postBodyExtraPhotoDoubleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
         })}
     </View>
 );
 
 const PostRowExtraImagesTriple = (props: any) => (
     <View style={styles.postBodyExtra}>
-        {props.photos.map((item: string) => {
-            return <View style={styles.postBodyExtraPhotoTripleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
+        {props.photos.map((item: string, index: number) => {
+            return <View key={index} style={styles.postBodyExtraPhotoTripleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
         })}
     </View>
 );

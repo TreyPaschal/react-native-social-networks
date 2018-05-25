@@ -6,13 +6,19 @@ import {
 import { NavigationScreenProps, createStackNavigator } from 'react-navigation'
 
 export const createStackNavigatorKeyboardAvoiding = (routeConfigMap: any, stackConfig = {}): any => {
+
     let NavigationContainer = createStackNavigator(routeConfigMap, stackConfig)
     console.log(NavigationContainer)
-    return () => {
-        return (
-            <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-                <NavigationContainer />
-            </KeyboardAvoidingView>
-        );
-    }
+    return class extends React.Component {
+        static router = NavigationContainer.router;
+        render() {
+            const { navigation }: any = this.props;
+
+            return (
+                <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" >
+                    <NavigationContainer navigation={navigation} />
+                </KeyboardAvoidingView>
+            );
+        }
+    };
 };

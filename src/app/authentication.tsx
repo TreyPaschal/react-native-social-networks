@@ -27,6 +27,10 @@ class AuthenticationScreen extends React.Component<NavigationScreenProps, any> {
         this._bootstrapAsync();
     }
 
+    componentWillMount() {
+        console.log('AuthenticationScreen')
+    }
+
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
 
@@ -42,6 +46,8 @@ class AuthenticationScreen extends React.Component<NavigationScreenProps, any> {
         require('../assets/messages.png')
         require('../node_modules/react-navigation/src/views/assets/back-icon.png')
 
+
+        await new Promise((resolve) => setTimeout(resolve, 100))
         DefaultClient.Instance.isAuthorized()
             .then((authorized) => {
                 if (authorized) {

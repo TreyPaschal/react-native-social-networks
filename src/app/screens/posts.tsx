@@ -8,11 +8,20 @@ import { createStackNavigator, NavigationScreenProps, NavigationRouteConfigMap, 
 import { PostRow } from '../components/posts'
 
 import { DefaultClient } from '../helpers/client'
+import { ImagePicker } from '../components/image-picker'
 
 
 class PostsScreenInternal extends React.Component<NavigationScreenProps, any>  {
-    static navigationOptions = {
-        title: 'Moments',
+    static navigationOptions = ({ navigation }: any) => {
+        return {
+            title: 'Moments',
+            headerRight: (
+                <Button
+                    onPress={() => navigation.navigate('XImagePicker')}
+                    title="+"
+                />
+            ),
+        }
     };
 
     componentDidMount() {
@@ -45,6 +54,8 @@ class PostsScreenInternal extends React.Component<NavigationScreenProps, any>  {
     }
 
 
+
+
     render() {
         return (
             <FlatList
@@ -57,7 +68,7 @@ class PostsScreenInternal extends React.Component<NavigationScreenProps, any>  {
                 }
                 horizontal={false}
                 data={this.state.data}
-                keyExtractor={(item: any, index) => item._id}
+                keyExtractor={(item: any, index: number) => item._id.toString()}
                 renderItem={({ item }: any) =>
                     <PostRow {...item} />
                 }
@@ -84,7 +95,10 @@ const styles = StyleSheet.create({
 const PostsScreen = createStackNavigator({
     Home: {
         screen: PostsScreenInternal,
-    }
+    },
+    Picker: {
+        screen: ImagePicker,
+    },
 });
 
 

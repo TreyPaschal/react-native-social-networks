@@ -10,25 +10,14 @@ import { NavigationScreenProps, Header } from 'react-navigation'
 import { MessageRow } from '../components/messages'
 
 
-class KeyboardAvoidingViewX extends KeyboardAvoidingView {
-    constructor(props: any) {
-        props.keyboardVerticalOffset = Header.HEIGHT
-        if (StatusBar.currentHeight !== undefined) {
-            props.keyboardVerticalOffset += props.keyboardVerticalOffset
-        }
-        console.log(props.keyboardVerticalOffset)
-        super(props)
-    }
-
-    render() {
-        return super.render()
-    }
-}
-
 
 class ChatScreen extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
+
+        const { navigation } = this.props;
+        console.log(navigation.state)
+        console.log(ChatScreen.router)
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
@@ -60,9 +49,9 @@ class ChatScreen extends React.Component<any, any> {
             >
                 <FlatList ref='scrollView' style={{ flexGrow: 1, height: 0 }}
                     contentContainerStyle={{ paddingVertical: 10, }}
-                    onContentSizeChange={(width,height) => this.refs.scrollView.scrollToEnd()}
-                    onLayout={() => this.refs.scrollView.scrollToEnd({animated: true})}
-                    
+                    onContentSizeChange={(width, height) => this.refs.scrollView.scrollToEnd()}
+                    onLayout={() => this.refs.scrollView.scrollToEnd({ animated: true })}
+
                     data={this.state.data}
                     keyExtractor={(item: any, index: number) => index.toString()}
                     renderItem={({ item }: any) => <MessageRow  {...item} />}
