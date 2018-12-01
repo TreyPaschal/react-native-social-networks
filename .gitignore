@@ -3,5 +3,7 @@ node_modules/
 .vscode/
 npm-debug.*
 
+.DS_Store
+
 *.js
 *.js.map
