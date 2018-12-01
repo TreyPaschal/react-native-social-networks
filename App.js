@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>
-          Change code in23 the editor and watch it change on your phone! Save to get a shareable url.
+          Change code ssss the editor and watch it change on your phone! Save to get a shareable url.
         </Text>
         <Card>
           <AssetExample />
