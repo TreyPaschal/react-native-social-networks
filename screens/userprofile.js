@@ -2,9 +2,9 @@ import * as React from 'react';
 import { StyleSheet, Text, View, ScrollView, StatusBar, ListView, Button, Image, Platform, NativeModules, Dimensions } from 'react-native';
 
 
-class UserProfileScreen extends React.Component<any, any> {
+class UserProfileScreen extends React.Component {
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -14,12 +14,12 @@ class UserProfileScreen extends React.Component<any, any> {
     }
 
     render() {
-        let user: any = this.state.user;
+        let user = this.state.user;
 
         return (
             <View style={{ backgroundColor: 'black' }}>
                 <Image source={{ uri: user['picture'] }} style={styles.photo} />
-                <Image source={require('../../assets/gradient.png')} style={styles.photo} />
+                <Image source={require('../assets/gradient.png')} style={styles.photo} />
                 <ScrollView style={{ height: '100%', backgroundColor: 'transparent', zIndex: 1 }}>
                     <View style={styles.photoPlaceholder}></View>
                     <View style={styles.profile}>

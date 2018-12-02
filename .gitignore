@@ -1,9 +1,10 @@
-node_modules/
+# OS and IDE
 .expo/
 .vscode/
-npm-debug.*
-
 .DS_Store
 
-*.js
-*.js.map
+# NODE and NPM
+node_modules/
+npm-debug.*
+package-lock.json
+

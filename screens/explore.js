@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import {
     StyleSheet, Text, View, ScrollView, StatusBar,
     FlatList, Button, Image, Platform, NativeModules, TouchableOpacity, Dimensions,
@@ -10,7 +10,7 @@ import UserProfileScreen from './userprofile'
 import { DefaultClient } from '../helpers/client'
 
 
-class ExploreScreenInternal extends React.Component<NavigationScreenProps, any>  {
+class ExploreScreenInternal extends React.Component  {
     static navigationOptions = {
         title: 'Discover',
     };
@@ -19,7 +19,7 @@ class ExploreScreenInternal extends React.Component<NavigationScreenProps, any> 
         this._onRefresh()
     }
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -65,8 +65,8 @@ class ExploreScreenInternal extends React.Component<NavigationScreenProps, any> 
                 numColumns={3}
                 contentContainerStyle={{ borderWidth: 1, borderColor: '#FFFFFF' }}
                 data={this.state.data}
-                keyExtractor={(item: any, index) => item._id}
-                renderItem={({ item }: any) =>
+                keyExtractor={(item, index) => item._id}
+                renderItem={({ item }) =>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('UserProfile', { name: item.name })} >
                         <Image source={{ uri: item.picture }} style={styles.photo} />
@@ -92,14 +92,14 @@ const styles = StyleSheet.create({
     },
 });
 
-const ExploreScreen = createStackNavigator({
+export default ExploreScreen = createStackNavigator({
     Home: {
         screen: ExploreScreenInternal,
     },
     UserProfile: {
         path: 'people/:name',
         screen: UserProfileScreen,
-        navigationOptions: ({ navigation }: any) => ({
+        navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.name}`,
         }),
     }
@@ -107,12 +107,11 @@ const ExploreScreen = createStackNavigator({
 
 ExploreScreen.navigationOptions = {
     tabBarLabel: 'Discover',
-    tabBarIcon: ({ tintColor }: any) => (
+    tabBarIcon: ({ tintColor }) => (
         <Image
-            source={require('../../assets/explore.png')}
+            source={require('../assets/explore.png')}
             style={[styles.icon, { tintColor: tintColor }]}
         />
     ),
 };
 
-export default ExploreScreen;

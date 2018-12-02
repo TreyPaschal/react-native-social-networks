@@ -8,37 +8,21 @@ import {
 } from 'react-native';
 
 
-export interface Client {
-    isAuthorized(): Promise<boolean>;
-    logout(): Promise<void>;
-    login(username: string, password: string): Promise<ClientResponse>;
-    getProfile(): Promise<ClientResponse>;
-    getUsers(position: Position): Promise<ClientResponse>;
-    getPosts(position: Position): Promise<ClientResponse>;
-}
+export class DefaultClient  {
 
-export interface ClientResponse {
-    code: number;
-    message: string;
-    result: any;
-    version: number;
-}
+    token = undefined;
 
-export class DefaultClient implements Client {
+    static _instance;
 
-    public token: string | undefined = undefined;
-
-    private static _instance: Client;
-
-    public static get Instance() {
+    static get Instance() {
         return this._instance || (this._instance = new this());
     }
 
-    public getProfile() {
+    getProfile() {
         return this.request('/user/profile', {});
     }
 
-    private request(path: string, data: any) {
+    request(path, data) {
         data.token = this.token;
         return fetch('https://vertical-social-networks.herokuapp.com' + path,
             {
@@ -59,7 +43,7 @@ export class DefaultClient implements Client {
     }
 
 
-    public isAuthorized() {
+    isAuthorized() {
         return AsyncStorage.getItem('auth_token', (err, result) => {
             return result;
         }).then((token) => {
@@ -73,18 +57,18 @@ export class DefaultClient implements Client {
     }
 
 
-    private auth(username: string, password: string) {
+    auth(username, password) {
         return this.request('/authenticate', { username, password });
     }
 
-    public getUsers(position: Position) {
+    getUsers(position) {
         return this.request('/users',
             {
                 position: position.coords.latitude + ',' + position.coords.longitude
             });
     }
 
-    public getPosts(position: Position): Promise<ClientResponse> {
+    getPosts(position) {
         console.log('getPosts?')
         return new Promise(function (resolve, reject) {
             resolve({
@@ -188,7 +172,7 @@ export class DefaultClient implements Client {
     }
 
 
-    public login(username: string, password: string) {
+    login(username, password) {
         return this.auth(username, password)
             .then((response) => {
                 if (response.code == 0) {
@@ -201,7 +185,7 @@ export class DefaultClient implements Client {
             })
     }
 
-    public logout() {
+    logout() {
         this.token = undefined;
         return AsyncStorage.removeItem('auth_token')
     }
