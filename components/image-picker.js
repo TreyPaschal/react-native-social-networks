@@ -5,8 +5,8 @@ import {
 } from 'react-native';
 
 
-export class ImagePicker extends React.Component<any, any> {
-  constructor(props: any) {
+export class ImagePicker extends React.Component {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -57,14 +57,14 @@ export class ImagePicker extends React.Component<any, any> {
       <SafeAreaView>
         <FlatList
           data={this.state.photos}
-          keyExtractor={(item: any, index) => index.toString()}
+          keyExtractor={(item, index) => index.toString()}
           onEndReachedThreshold={0.125}
           onEndReached={({ distanceFromEnd }) => {
             console.log('on end reached ', distanceFromEnd)
             this._handleButtonPress()
           }}
           numColumns={4}
-          renderItem={({ item, i }: any) => (
+          renderItem={({ item, i }) => (
             <TouchableOpacity key={i} style={{
               flex: 1,
               aspectRatio: 1,

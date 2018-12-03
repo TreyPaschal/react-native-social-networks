@@ -1,18 +1,27 @@
-import * as React from 'react'
+import * as React from 'react';
 import {
     StyleSheet, Text, View, ScrollView, StatusBar,
     FlatList, Button, Image, Platform, NativeModules, TouchableOpacity, Dimensions,
     RefreshControl
 } from 'react-native';
 import { createStackNavigator, NavigationScreenProps, NavigationRouteConfigMap, StackNavigatorConfig } from 'react-navigation';
-import UserProfileScreen from './userprofile'
+import { PostRow } from '../components/posts'
 
-import { DefaultClient } from '../helpers/client'
+import { DefaultClient } from '../helpers/DefaultClient'
+import { ImagePicker } from '../components/image-picker'
 
 
-class ExploreScreenInternal extends React.Component  {
-    static navigationOptions = {
-        title: 'Discover',
+class PostsScreenInternal extends React.Component  {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Moments',
+            headerRight: (
+                <Button
+                    onPress={() => navigation.navigate('XImagePicker')}
+                    title="+"
+                />
+            ),
+        }
     };
 
     componentDidMount() {
@@ -30,25 +39,21 @@ class ExploreScreenInternal extends React.Component  {
 
     _onRefresh() {
 
-        console.log('i run 1')
         this.setState({ refreshing: true });
         navigator.geolocation.getCurrentPosition((position) => {
-            console.log('i run 2')
-            DefaultClient.Instance.getUsers(position)
+            DefaultClient.Instance.getPosts(position)
                 .then((ret) => {
-                    console.log('i run 3')
                     this.setState({ refreshing: false });
                     this.setState({ data: ret.result });
                 })
                 .catch((error) => {
                     console.log(error)
-                    console.log('what ever');
                     this.setState({ refreshing: false });
                 });
-        }, (error) => {
-            console.log(error)
         })
     }
+
+
 
 
     render() {
@@ -62,15 +67,10 @@ class ExploreScreenInternal extends React.Component  {
                     />
                 }
                 horizontal={false}
-                numColumns={3}
-                contentContainerStyle={{ borderWidth: 1, borderColor: '#FFFFFF' }}
                 data={this.state.data}
-                keyExtractor={(item, index) => item._id}
+                keyExtractor={(item, index) => item._id.toString()}
                 renderItem={({ item }) =>
-                    <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('UserProfile', { name: item.name })} >
-                        <Image source={{ uri: item.picture }} style={styles.photo} />
-                    </TouchableOpacity>
+                    <PostRow {...item} />
                 }
             />
         );
@@ -92,26 +92,22 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ExploreScreen = createStackNavigator({
+export const PostsScreen = createStackNavigator({
     Home: {
-        screen: ExploreScreenInternal,
+        screen: PostsScreenInternal,
     },
-    UserProfile: {
-        path: 'people/:name',
-        screen: UserProfileScreen,
-        navigationOptions: ({ navigation }) => ({
-            title: `${navigation.state.params.name}`,
-        }),
-    }
+    Picker: {
+        screen: ImagePicker,
+    },
 });
 
-ExploreScreen.navigationOptions = {
-    tabBarLabel: 'Discover',
+
+PostsScreen.navigationOptions = {
+    tabBarLabel: 'Moments',
     tabBarIcon: ({ tintColor }) => (
         <Image
-            source={require('../assets/explore.png')}
+            source={require('../assets/friends.png')}
             style={[styles.icon, { tintColor: tintColor }]}
         />
     ),
 };
-

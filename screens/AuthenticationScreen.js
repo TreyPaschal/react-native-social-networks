@@ -9,7 +9,7 @@ import {
   Text,
  } from 'react-native';
 
-import {DefaultClient} from '../helpers/client'
+import {DefaultClient} from '../helpers/DefaultClient'
 
 export class AuthenticationScreen extends React.Component {
 
@@ -31,9 +31,9 @@ export class AuthenticationScreen extends React.Component {
       DefaultClient.Instance.isAuthorized()
           .then((authorized) => {
               if (authorized) {
-                  this.props.navigation.navigate('App');
+                  this.props.navigation.navigate('Main');
               } else {
-                  this.props.navigation.navigate('Auth');
+                  this.props.navigation.navigate('Login');
               }
           })
   };

@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     },
     postBodyExtraPhotoSingleFrame: {
         padding: 2.5,
-        width: Dimensions.get('window').width - 15,
+        maxWidth: Dimensions.get('window').width - 15,
+        maxHeight: Dimensions.get('window').height,
     },
     postBodyExtraPhotoDoubleFrame: {
         padding: 2.5,
@@ -77,6 +78,15 @@ const styles = StyleSheet.create({
         width: (Dimensions.get('window').width - 15) / 3,
         height: (Dimensions.get('window').width - 15) / 3,
     },
+    postBodyExtraPhotoSingle: {
+        width: Dimensions.get('window').width - 20,
+        height: '100%',
+        minHeight: Dimensions.get('window').width/3,
+        maxHeight: Dimensions.get('window').width,
+        borderWidth: 0.5,
+        backgroundColor: '#d6d7da',
+        borderColor: '#d6d7da'
+    },
     postBodyExtraPhotoMultiple: {
         width: '100%',
         height: '100%',
@@ -87,7 +97,7 @@ const styles = StyleSheet.create({
 });
 
 class BodyExtraPhotoSingle extends React.Component {
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -96,20 +106,24 @@ class BodyExtraPhotoSingle extends React.Component {
         };
     }
 
-    _onLayout(event: any) {
+    _onLayout(event) {
         const containerWidth = event.nativeEvent.layout.width;
+
 
         Image.getSize(this.props.source, (width, height) => {
             this.setState({
                 width: containerWidth,
                 height: Math.min(containerWidth * Math.min((height / width), 1), height * 3)
             });
-        });
+        },
+        (e) => {console.log(this.props.source)}
+        );
     }
 
     render() {
+
         return (
-            <View onLayout={this._onLayout.bind(this)} style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
                 <Image
                     resizeMode='contain'
                     source={this.props.source}
@@ -126,32 +140,35 @@ class BodyExtraPhotoSingle extends React.Component {
 
 
 
-const PostRowExtraImagesSingle = (props: any) => (
+const PostRowExtraImagesSingle = (props) => (
     <View style={styles.postBodyExtra}>
-        {props.photos.map((item: string, index: number) => {
-            // return <View style={styles.postBodyExtraPhotoSingleFrame}><Image source={{ uri: item }} resizeMode='contain' style={styles.postBodyExtraPhotoSingle} /></View>
-            return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><BodyExtraPhotoSingle source={{ uri: item }} /></View>
+        {props.photos.map((item, index) => {
+            console.log(typeof item)
+            return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><Image resizeMode="contain" source={{ uri: item }} style={styles.postBodyExtraPhotoSingle} /></View>
+            // return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><BodyExtraPhotoSingle source={{ uri: item }} /></View>
         })}
     </View>
 );
 
-const PostRowExtraImagesDouble = (props: any) => (
+const PostRowExtraImagesDouble = (props) => (
     <View style={styles.postBodyExtra}>
-        {props.photos.map((item: string, index: number) => {
+        {props.photos.map((item, index) => {
+            console.log(typeof item)
             return <View key={index} style={styles.postBodyExtraPhotoDoubleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
         })}
     </View>
 );
 
-const PostRowExtraImagesTriple = (props: any) => (
+const PostRowExtraImagesTriple = (props) => (
     <View style={styles.postBodyExtra}>
-        {props.photos.map((item: string, index: number) => {
+        {props.photos.map((item, index) => {
+            console.log(typeof item)
             return <View key={index} style={styles.postBodyExtraPhotoTripleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
         })}
     </View>
 );
 
-const PostRowExtraImages = (props: any) => {
+const PostRowExtraImages = (props) => {
     if (props.photos.length == 0) {
         return null;
     } else if (props.photos.length == 1) {
@@ -167,7 +184,7 @@ const PostRowExtraImages = (props: any) => {
 
 
 
-export const PostRow = (props: any) => {
+export const PostRow = (props) => {
     console.log(props.photos[0])
     return (
         <View style={styles.containerBorder}>

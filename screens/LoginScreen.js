@@ -6,11 +6,11 @@ import {
 } from 'react-native';
 import { StackNavigator, TabNavigator, NavigationScreenProps, NavigationRouteConfigMap, StackNavigatorConfig, SafeAreaView } from 'react-navigation';
 
-import { DefaultClient } from '../helpers/client'
+import { DefaultClient } from '../helpers/DefaultClient'
 
-class LoginScreen extends React.Component<NavigationScreenProps, any> {
+export class LoginScreen extends React.Component {
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -70,7 +70,7 @@ class LoginScreen extends React.Component<NavigationScreenProps, any> {
         DefaultClient.Instance.login(this.state.username, this.state.password)
             .then((response) => {
                 if (response.code == 0) {
-                    this.props.navigation.navigate('Root');
+                    this.props.navigation.navigate('Auth');
                 } else {
                     this.setState({ 'error': response.message })
                 }
@@ -94,5 +94,3 @@ const styles = StyleSheet.create({
         marginTop: 15,
     }
 });
-
-export default LoginScreen;

@@ -2,8 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View, ScrollView, StatusBar, ListView, Button, Image, Platform, NativeModules, Dimensions } from 'react-native';
 
 
-class UserProfileScreen extends React.Component {
-
+export class UserProfileScreen extends React.Component {
     constructor(props) {
         super(props);
 
@@ -73,5 +72,3 @@ const styles = StyleSheet.create({
         color: 'white',
     }
 });
-
-export default UserProfileScreen;

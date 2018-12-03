@@ -2,17 +2,17 @@ import * as React from 'react';
 import { StyleSheet, Text, View, StatusBar, ScrollView, Switch, TouchableOpacity, Button, Slider, Image, Platform, NativeModules, SectionList } from 'react-native';
 import { SafeAreaView, NavigationScreenProps, createStackNavigator } from 'react-navigation';
 
-import { DefaultClient } from '../helpers/client'
+import { DefaultClient } from '../helpers/DefaultClient'
 import { SettingsButton, SettingsSwitch, SettingsSection, SettingsView, SettingsGeneralItem, SettingsNavigator } from '../components/settings'
 
-class SettingsScreenInternal extends React.Component<NavigationScreenProps, any> {
+class SettingsScreenInternal extends React.Component {
 
     static navigationOptions = {
         title: 'Settings',
     };
 
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -25,7 +25,7 @@ class SettingsScreenInternal extends React.Component<NavigationScreenProps, any>
     logoutAsync = async () => {
 
         await DefaultClient.Instance.logout();
-        this.props.navigation.navigate('Root');
+        this.props.navigation.navigate('Auth');
     };
 
     render() {
@@ -36,15 +36,15 @@ class SettingsScreenInternal extends React.Component<NavigationScreenProps, any>
 
                     <SettingsSwitch {... {
                         value: this.state.toggled2,
-                        onValueChange: (value: boolean) => this.setState({ toggled2: value }),
+                        onValueChange: (value) => this.setState({ toggled2: value }),
                         title: 'Meow',
-                        image: require('../../assets/images/wifi.png')
+                        image: require('../assets/images/wifi.png')
                     }} />
                     <SettingsSwitch {... {
                         value: this.state.toggled,
-                        onValueChange: (value: boolean) => this.setState({ toggled: value }),
+                        onValueChange: (value) => this.setState({ toggled: value }),
                         title: 'WLAN',
-                        image: require('../../assets/images/wifi.png')
+                        image: require('../assets/images/wifi.png')
                     }} />
                 </SettingsSection>
 
@@ -57,19 +57,19 @@ class SettingsScreenInternal extends React.Component<NavigationScreenProps, any>
                     <SettingsNavigator {... {
                         title: 'Carrier',
                         text: 'AT&T',
-                        image: require('../../assets/images/wifi.png')
+                        image: require('../assets/images/wifi.png')
                     }}>
                     </SettingsNavigator>
                     <SettingsNavigator {... {
                         title: 'Bluetooth',
                         text: 'Not Connected',
-                        image: require('../../assets/images/wifi.png')
+                        image: require('../assets/images/wifi.png')
                     }}>
                     </SettingsNavigator>
                     <SettingsNavigator {... {
                         title: 'Control Center',
                         text: '',
-                        image: require('../../assets/images/wifi.png')
+                        image: require('../assets/images/wifi.png')
                     }}>
                     </SettingsNavigator>
                 </SettingsSection>
@@ -82,7 +82,7 @@ class SettingsScreenInternal extends React.Component<NavigationScreenProps, any>
     }
 }
 
-const SettingsScreen = createStackNavigator({
+export const SettingsScreen = createStackNavigator({
     Home: {
         screen: SettingsScreenInternal,
     }
@@ -90,9 +90,9 @@ const SettingsScreen = createStackNavigator({
 
 SettingsScreen.navigationOptions = {
     tabBarLabel: 'Settings',
-    tabBarIcon: ({ tintColor }: any) => (
+    tabBarIcon: ({ tintColor }) => (
         <Image
-            source={require('../../assets/settings.png')}
+            source={require('../assets/settings.png')}
             style={[styles.icon, { tintColor: tintColor }]}
         />
     ),
@@ -104,5 +104,3 @@ const styles = StyleSheet.create({
         height: 25,
     },
 });
-
-export default SettingsScreen;

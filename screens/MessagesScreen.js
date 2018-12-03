@@ -9,16 +9,16 @@ import { NavigationScreenProps, createStackNavigator } from 'react-navigation'
 import { createStackNavigatorKeyboardAvoiding } from '../components/navigation'
 
 import { MessagesRow } from '../components/messages'
-import ChatScreen from './chat'
+import { ChatScreen } from './ChatScreen'
 
 
 
-class MessagesScreenInternal extends React.Component<NavigationScreenProps, any> {
+class MessagesScreenInternal extends React.Component {
     static navigationOptions = {
         title: 'Messages',
     };
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -34,8 +34,8 @@ class MessagesScreenInternal extends React.Component<NavigationScreenProps, any>
         return (
             <FlatList style={{ height: '100%', backgroundColor: '#fff' }}
                 data={this.state.data}
-                keyExtractor={(item: any, index: number) => index.toString()}
-                renderItem={({ item }: any) =>
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) =>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Chat', { name: item.name })}
                     ><MessagesRow  {...item} /></TouchableOpacity>}
@@ -54,14 +54,14 @@ const styles = StyleSheet.create({
 
 
 
-const MessagesScreen = createStackNavigatorKeyboardAvoiding({
+export const MessagesScreen = createStackNavigatorKeyboardAvoiding({
     Home: {
         screen: MessagesScreenInternal,
     },
     Chat: {
         path: 'people/:name',
         screen: ChatScreen,
-        navigationOptions: ({ navigation }: any) => ({
+        navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.name}`,
         }),
     },
@@ -71,12 +71,10 @@ console.log(MessagesScreen)
 
 MessagesScreen.navigationOptions = {
     tabBarLabel: 'Messages',
-    tabBarIcon: ({ tintColor }: any) => (
+    tabBarIcon: ({ tintColor }) => (
         <Image
-            source={require('../../assets/messages.png')}
+            source={require('../assets/messages.png')}
             style={[styles.icon, { tintColor: tintColor }]}
         />
     ),
 };
-
-export default MessagesScreen;

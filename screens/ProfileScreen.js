@@ -5,10 +5,10 @@ import {
 } from 'react-native';
 import { SafeAreaView, NavigationScreenProps, createStackNavigator } from 'react-navigation'
 
-import { DefaultClient } from '../helpers/client'
+import { DefaultClient } from '../helpers/DefaultClient'
 
-class ProfileScreenInternal extends React.Component<NavigationScreenProps, any> {
-    static navigationOptions = ({ navigation }: any) => {
+class ProfileScreenInternal extends React.Component {
+    static navigationOptions = ({ navigation }) => {
         return {
             title: 'Profile',
             headerLeft: (
@@ -22,7 +22,7 @@ class ProfileScreenInternal extends React.Component<NavigationScreenProps, any> 
                     onPress={() => navigation.navigate('Settings')}
                 >
                     <Image
-                        source={require('../../assets/settings.png')}
+                        source={require('../assets/settings.png')}
                         style={{ tintColor: '#007AFF', height: 24, width: 24, marginRight: 10 }}
                     />
                 </TouchableOpacity>
@@ -33,7 +33,7 @@ class ProfileScreenInternal extends React.Component<NavigationScreenProps, any> 
         }
     };
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -79,7 +79,7 @@ class ProfileScreenInternal extends React.Component<NavigationScreenProps, any> 
                     flexDirection: 'row',
                     padding: 15,
                 }}>
-                    <Image source={require('../../assets/images/user.jpg')} style={{
+                    <Image source={require('../assets/images/user.jpg')} style={{
                         height: 80,
                         width: 80,
                         borderRadius: 6.5,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const ProfileScreen = createStackNavigator({
+export const ProfileScreen = createStackNavigator({
     Home: {
         screen: ProfileScreenInternal,
     }
@@ -143,12 +143,10 @@ const ProfileScreen = createStackNavigator({
 
 ProfileScreen.navigationOptions = {
     tabBarLabel: 'Profile',
-    tabBarIcon: ({ tintColor }: any) => (
+    tabBarIcon: ({ tintColor }) => (
         <Image
-            source={require('../../assets/profile.png')}
+            source={require('../assets/profile.png')}
             style={[styles.icon, { tintColor: tintColor }]}
         />
     ),
 };
-
-export default ProfileScreen;

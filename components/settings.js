@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export const SettingsButton = (props: any) => (
+export const SettingsButton = (props) => (
     <View style={{
         backgroundColor: '#FFFFFF',
         borderBottomColor: '#c8c7cc',
@@ -39,7 +39,7 @@ export const SettingsButton = (props: any) => (
     </View>
 );
 
-export const SettingsGeneralItem = (props: any) => (
+export const SettingsGeneralItem = (props) => (
     <View style={{
         backgroundColor: '#FFFFFF',
         borderBottomColor: '#c8c7cc',
@@ -50,7 +50,7 @@ export const SettingsGeneralItem = (props: any) => (
     </View>
 );
 
-export const SettingsSwitch = (props: any) => (
+export const SettingsSwitch = (props) => (
     <View style={{
         backgroundColor: '#FFFFFF',
         flex: 1,
@@ -76,7 +76,7 @@ export const SettingsSwitch = (props: any) => (
     </View>
 );
 
-export const SettingsNavigator = (props: any) => (
+export const SettingsNavigator = (props) => (
     <View style={{
         backgroundColor: '#FFFFFF',
         flex: 1,
@@ -104,7 +104,7 @@ export const SettingsNavigator = (props: any) => (
 );
 
 
-export const SettingsSection = (props: any) => (
+export const SettingsSection = (props) => (
     <View style={{
         backgroundColor: '#EFEFF4',
         paddingTop: 20, paddingBottom: 15
@@ -125,7 +125,7 @@ export const SettingsSection = (props: any) => (
 
 
 
-export const SettingsView = (props: any) => (
+export const SettingsView = (props) => (
     <ScrollView style={{
         backgroundColor: '#EFEFF4',
         paddingVertical: 7

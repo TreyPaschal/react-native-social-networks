@@ -5,14 +5,14 @@ import {
 
 import { NavigationScreenProps, createStackNavigator } from 'react-navigation'
 
-export const createStackNavigatorKeyboardAvoiding = (routeConfigMap: any, stackConfig = {}): any => {
+export const createStackNavigatorKeyboardAvoiding = (routeConfigMap, stackConfig = {})=> {
 
     let NavigationContainer = createStackNavigator(routeConfigMap, stackConfig)
     console.log(NavigationContainer)
     return class extends React.Component {
         static router = NavigationContainer.router;
         render() {
-            const { navigation }: any = this.props;
+            const { navigation } = this.props;
 
             return (
                 <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" >

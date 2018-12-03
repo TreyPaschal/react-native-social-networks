@@ -11,8 +11,8 @@ import { MessageRow } from '../components/messages'
 
 
 
-class ChatScreen extends React.Component<any, any> {
-    constructor(props: any) {
+export class ChatScreen extends React.Component {
+    constructor(props) {
         super(props);
 
         const { navigation } = this.props;
@@ -53,8 +53,8 @@ class ChatScreen extends React.Component<any, any> {
                     onLayout={() => this.refs.scrollView.scrollToEnd({ animated: true })}
 
                     data={this.state.data}
-                    keyExtractor={(item: any, index: number) => index.toString()}
-                    renderItem={({ item }: any) => <MessageRow  {...item} />}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => <MessageRow  {...item} />}
                 />
                 <View
 
@@ -92,6 +92,3 @@ const styles = StyleSheet.create({
         height: 25,
     },
 });
-
-
-export default ChatScreen;

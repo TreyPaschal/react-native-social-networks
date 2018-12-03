@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export const MessagesRow = (props: any) => (
+export const MessagesRow = (props) => (
     <View style={styles.container}>
         <Image source={{ uri: props.picture }} style={styles.photo} />
         <View style={{
@@ -114,7 +114,7 @@ const stylesChat = StyleSheet.create({
 
 
 
-export const MessageRow = (props: any) => (
+export const MessageRow = (props) => (
     <View style={props.me ? [stylesChat.container, stylesChat.containerMe] : stylesChat.container}>
         <Image source={{ uri: props.picture }} style={stylesChat.photo} />
         <View style={props.me ? [stylesChat.messageContainer, stylesChat.messageContainerMe] : stylesChat.messageContainer}>

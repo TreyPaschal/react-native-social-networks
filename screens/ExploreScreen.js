@@ -1,34 +1,24 @@
-import * as React from 'react';
+import * as React from 'react'
 import {
     StyleSheet, Text, View, ScrollView, StatusBar,
     FlatList, Button, Image, Platform, NativeModules, TouchableOpacity, Dimensions,
     RefreshControl
 } from 'react-native';
 import { createStackNavigator, NavigationScreenProps, NavigationRouteConfigMap, StackNavigatorConfig } from 'react-navigation';
-import { PostRow } from '../components/posts'
-
-import { DefaultClient } from '../helpers/client'
-import { ImagePicker } from '../components/image-picker'
+import { UserProfileScreen } from './UserProfileScreen'
+import { DefaultClient } from '../helpers/DefaultClient'
 
 
-class PostsScreenInternal extends React.Component<NavigationScreenProps, any>  {
-    static navigationOptions = ({ navigation }: any) => {
-        return {
-            title: 'Moments',
-            headerRight: (
-                <Button
-                    onPress={() => navigation.navigate('XImagePicker')}
-                    title="+"
-                />
-            ),
-        }
+class ExploreScreenInternal extends React.Component {
+    static navigationOptions = {
+        title: 'Discover',
     };
 
     componentDidMount() {
         this._onRefresh()
     }
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -39,21 +29,25 @@ class PostsScreenInternal extends React.Component<NavigationScreenProps, any>  {
 
     _onRefresh() {
 
+        console.log('i run 1')
         this.setState({ refreshing: true });
         navigator.geolocation.getCurrentPosition((position) => {
-            DefaultClient.Instance.getPosts(position)
+            console.log('i run 2')
+            DefaultClient.Instance.getUsers(position)
                 .then((ret) => {
+                    console.log('i run 3')
                     this.setState({ refreshing: false });
                     this.setState({ data: ret.result });
                 })
                 .catch((error) => {
                     console.log(error)
+                    console.log('what ever');
                     this.setState({ refreshing: false });
                 });
+        }, (error) => {
+            console.log(error)
         })
     }
-
-
 
 
     render() {
@@ -67,10 +61,15 @@ class PostsScreenInternal extends React.Component<NavigationScreenProps, any>  {
                     />
                 }
                 horizontal={false}
+                numColumns={3}
+                contentContainerStyle={{ borderWidth: 1, borderColor: '#FFFFFF' }}
                 data={this.state.data}
-                keyExtractor={(item: any, index: number) => item._id.toString()}
-                renderItem={({ item }: any) =>
-                    <PostRow {...item} />
+                keyExtractor={(item, index) => item._id}
+                renderItem={({ item }) =>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('UserProfile', { name: item.name })} >
+                        <Image source={{ uri: item.picture }} style={styles.photo} />
+                    </TouchableOpacity>
                 }
             />
         );
@@ -92,24 +91,26 @@ const styles = StyleSheet.create({
     },
 });
 
-const PostsScreen = createStackNavigator({
+export const ExploreScreen = createStackNavigator({
     Home: {
-        screen: PostsScreenInternal,
+        screen: ExploreScreenInternal,
     },
-    Picker: {
-        screen: ImagePicker,
-    },
+    UserProfile: {
+        path: 'people/:name',
+        screen: UserProfileScreen,
+        navigationOptions: ({ navigation }) => ({
+            title: `${navigation.state.params.name}`,
+        }),
+    }
 });
 
-
-PostsScreen.navigationOptions = {
-    tabBarLabel: 'Moments',
-    tabBarIcon: ({ tintColor }: any) => (
+ExploreScreen.navigationOptions = {
+    tabBarLabel: 'Discover',
+    tabBarIcon: ({ tintColor }) => (
         <Image
-            source={require('../../assets/friends.png')}
+            source={require('../assets/explore.png')}
             style={[styles.icon, { tintColor: tintColor }]}
         />
     ),
 };
 
-export default PostsScreen;

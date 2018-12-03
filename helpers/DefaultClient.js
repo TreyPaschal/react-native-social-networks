@@ -77,16 +77,16 @@ export class DefaultClient  {
                         "_id": 11111,
                         "user_id": 11111,
                         "user_picture": "https://avatars2.githubusercontent.com/u/6030719?v=3&s=460",
-                        "timestamp": 1000000, "text": "What Ever", "photos": [
-                            "https://scontent.fbed1-1.fna.fbcdn.net/v/t1.0-9/32934292_1360302764071032_7191684581215436800_n.jpg?_nc_cat=0&oh=98afd7684bb177a54333121dbd9dc614&oe=5B9AB0DD"
+                        "timestamp": 1000000, "text": "What Ever1", "photos": [
+                            "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
                         ]
                     },
                     {
                         "_id": 11112,
                         "user_id": 11111,
                         "user_picture": "https://avatars2.githubusercontent.com/u/6030719?v=3&s=460",
-                        "timestamp": 1000000, "text": "What Ever", "photos": [
-                            "https://scontent.fbed1-1.fna.fbcdn.net/v/t1.0-9/32446436_1782995975068962_865392135837319168_n.jpg?_nc_cat=0&oh=058483201ae2efbae41f729f71937206&oe=5B9C5719"
+                        "timestamp": 1000000, "text": "What Ever2", "photos": [
+                            "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
                         ]
                     },
                     {
@@ -96,7 +96,7 @@ export class DefaultClient  {
                         "timestamp": 1000000,
                         "text": "What Ever?",
                         "photos": [
-                            "https://scontent.fbed1-1.fna.fbcdn.net/v/t1.0-9/32247281_266447213756365_2640353887067832320_n.jpg?_nc_cat=0&_nc_eui2=AeEFd2RmdifskxXA_VnNAE2u6stmMikO3Zerh_0EJCUbvZ-Facgb4v5Nw_j_ew8XldZGHyiyvO4OrRNxE_xRdByF35QLhBfwWB2y2w6wgqbQBQ&oh=0d6291ac62db1a77fde18998cbadc247&oe=5B8B0DBD",
+                            "https://adeshpande3.github.io/assets/GoogLeNet5.png",
                         ]
                     },
                     {
