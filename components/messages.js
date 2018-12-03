@@ -86,6 +86,7 @@ const stylesChat = StyleSheet.create({
         alignItems: 'flex-start',
     },
     messageContainerMe: {
+        flexGrow: 1,
         marginLeft: 43.5,
         marginRight: 7.5,
         alignItems: 'flex-end',

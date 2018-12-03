@@ -17,7 +17,6 @@ export class ChatScreen extends React.Component {
 
         const { navigation } = this.props;
         console.log(navigation.state)
-        console.log(ChatScreen.router)
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
@@ -48,18 +47,18 @@ export class ChatScreen extends React.Component {
             }}
             >
                 <FlatList ref='scrollView' style={{ flexGrow: 1, height: 0 }}
-                    contentContainerStyle={{ paddingVertical: 10, }}
-                    onContentSizeChange={(width, height) => this.refs.scrollView.scrollToEnd()}
-                    onLayout={() => this.refs.scrollView.scrollToEnd({ animated: true })}
-
+                    contentContainerStyle={{ flexGrow: 1, paddingVertical: 10, }}
+                    inverted ={true}
                     data={this.state.data}
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => <MessageRow  {...item} />}
+                    renderItem={({ item }) => {
+                    return <MessageRow  {...item} />
+                    }
+                    }
                 />
                 <View
 
                     style={{
-                        height: 48,
                         padding: 8,
                         borderColor: '#c8c7cc',
                         borderTopWidth: 0.5,
@@ -69,7 +68,6 @@ export class ChatScreen extends React.Component {
                     <TextInput
                         style={{
                             backgroundColor: '#FFFFFF',
-                            height: 32,
                             borderRadius: 8,
                             padding: 8,
                             borderColor: '#c8c7cc',
@@ -79,6 +77,14 @@ export class ChatScreen extends React.Component {
                         underlineColorAndroid={'#ffffff'}
                         onChangeText={(text) => this.setState({ text })}
                         value={this.state.text}
+                        onEndEditing = {(event) => {console.log('onEndEditing')}}
+                        onBlur = {(event) => {console.log('onBlur')}}
+                        multiline = {true}
+                        onSubmitEditing={(event) => {
+                            
+                            this.setState( {data : [...[{ "me": true, "user": 1, "message": this.state.text, 'picture': "https://avatars2.githubusercontent.com/u/6030719?v=3&s=460" }], ...this.state.data ]})
+                        }
+                        }
                     />
                 </View>
             </View>
