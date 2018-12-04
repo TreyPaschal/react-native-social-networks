@@ -2,11 +2,11 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 
-import { ExploreScreen } from './ExploreScreen'
-import { MessagesScreen } from './MessagesScreen'
-import { PostsScreen } from './PostsScreen'
-import { ProfileScreen } from './ProfileScreen'
-import { SettingsScreen } from './SettingsScreen'
+import { ExploreScreen } from './ExploreScreen';
+import { MessagesScreen } from './MessagesScreen';
+import { PostsScreen } from './PostsScreen';
+import { ProfileScreen } from './ProfileScreen';
+import { SettingsScreen } from './SettingsScreen';
 
 export const MainNavigator = createBottomTabNavigator(
   {

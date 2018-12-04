@@ -6,12 +6,12 @@ import { LoginScreen } from './screens/LoginScreen'
 
 export default createAppContainer(
   createSwitchNavigator(
-  {
-    Auth: AuthenticationScreen,
-    Login: LoginScreen,
-    Main: MainNavigator,
-  },
-  {
-    initialRouteName: 'Auth',
-  }
-));
+    {
+      Auth: AuthenticationScreen,
+      Login: LoginScreen,
+      Main: MainNavigator,
+    },
+    {
+      initialRouteName: 'Auth',
+    }
+  ));

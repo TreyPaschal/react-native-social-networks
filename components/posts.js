@@ -4,228 +4,228 @@ import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 
 
 const styles = StyleSheet.create({
-    containerBorder: {
-        paddingTop: 10,
-        backgroundColor: '#EFEFF4',
-    },
-    container: {
-        padding: 5,
-        backgroundColor: '#FFFFFF',
-    },
-    nameCard: {
-        padding: 5,
-        flexDirection: 'row',
-    },
-    nameCardphoto: {
-        height: 36,
-        width: 36,
-        borderRadius: 4,
-        backgroundColor: '#d6d7da'
-    },
-    nameCardTitle: {
-        height: 36,
-        marginLeft: 7.5,
-    },
-    nameCardName: {
-        fontSize: 15,
-        fontWeight: "600",
-        height: 20,
-    },
-    nameCardMetadata: {
-        fontSize: 12,
-        height: 16,
-    },
-    postBody: {
-    },
-    postBodyText: {
-        padding: 5,
-    },
-    postBodyExtra: {
-        padding: 2.5,
-        width: '100%',
-        flexDirection: 'row',
-        flexWrap: "wrap",
-    },
-    postPanel: {
-        marginTop: 5,
-        borderTopWidth: 0.5,
-        borderColor: '#d6d7da',
-        paddingTop: 10,
-        padding: 5,
-        width: '100%',
-        flexDirection: 'row',
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-    },
-    postPanelItem: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    postBodyExtraPhotoSingleFrame: {
-        padding: 2.5,
-        maxWidth: Dimensions.get('window').width - 15,
-        maxHeight: Dimensions.get('window').height,
-    },
-    postBodyExtraPhotoDoubleFrame: {
-        padding: 2.5,
-        aspectRatio: 1,
-        width: (Dimensions.get('window').width - 15) / 2,
-        height: (Dimensions.get('window').width - 15) / 2,
-    },
-    postBodyExtraPhotoTripleFrame: {
-        padding: 2.5,
-        aspectRatio: 1,
-        width: (Dimensions.get('window').width - 15) / 3,
-        height: (Dimensions.get('window').width - 15) / 3,
-    },
-    postBodyExtraPhotoSingle: {
-        width: Dimensions.get('window').width - 20,
-        height: '100%',
-        minHeight: Dimensions.get('window').width/3,
-        maxHeight: Dimensions.get('window').width,
-        borderWidth: 0.5,
-        backgroundColor: '#d6d7da',
-        borderColor: '#d6d7da'
-    },
-    postBodyExtraPhotoMultiple: {
-        width: '100%',
-        height: '100%',
-        borderWidth: 0.5,
-        backgroundColor: '#d6d7da',
-        borderColor: '#d6d7da'
-    },
+  containerBorder: {
+    paddingTop: 10,
+    backgroundColor: '#EFEFF4',
+  },
+  container: {
+    padding: 5,
+    backgroundColor: '#FFFFFF',
+  },
+  nameCard: {
+    padding: 5,
+    flexDirection: 'row',
+  },
+  nameCardphoto: {
+    height: 36,
+    width: 36,
+    borderRadius: 4,
+    backgroundColor: '#d6d7da'
+  },
+  nameCardTitle: {
+    height: 36,
+    marginLeft: 7.5,
+  },
+  nameCardName: {
+    fontSize: 15,
+    fontWeight: "600",
+    height: 20,
+  },
+  nameCardMetadata: {
+    fontSize: 12,
+    height: 16,
+  },
+  postBody: {
+  },
+  postBodyText: {
+    padding: 5,
+  },
+  postBodyExtra: {
+    padding: 2.5,
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: "wrap",
+  },
+  postPanel: {
+    marginTop: 5,
+    borderTopWidth: 0.5,
+    borderColor: '#d6d7da',
+    paddingTop: 10,
+    padding: 5,
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  postPanelItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  postBodyExtraPhotoSingleFrame: {
+    padding: 2.5,
+    maxWidth: Dimensions.get('window').width - 15,
+    maxHeight: Dimensions.get('window').height,
+  },
+  postBodyExtraPhotoDoubleFrame: {
+    padding: 2.5,
+    aspectRatio: 1,
+    width: (Dimensions.get('window').width - 15) / 2,
+    height: (Dimensions.get('window').width - 15) / 2,
+  },
+  postBodyExtraPhotoTripleFrame: {
+    padding: 2.5,
+    aspectRatio: 1,
+    width: (Dimensions.get('window').width - 15) / 3,
+    height: (Dimensions.get('window').width - 15) / 3,
+  },
+  postBodyExtraPhotoSingle: {
+    width: Dimensions.get('window').width - 20,
+    height: '100%',
+    minHeight: Dimensions.get('window').width / 3,
+    maxHeight: Dimensions.get('window').width,
+    borderWidth: 0.5,
+    backgroundColor: '#d6d7da',
+    borderColor: '#d6d7da'
+  },
+  postBodyExtraPhotoMultiple: {
+    width: '100%',
+    height: '100%',
+    borderWidth: 0.5,
+    backgroundColor: '#d6d7da',
+    borderColor: '#d6d7da'
+  },
 });
 
 class BodyExtraPhotoSingle extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            width: 0,
-            height: 0
-        };
-    }
+    this.state = {
+      width: 0,
+      height: 0
+    };
+  }
 
-    _onLayout(event) {
-        const containerWidth = event.nativeEvent.layout.width;
+  _onLayout(event) {
+    const containerWidth = event.nativeEvent.layout.width;
 
 
-        Image.getSize(this.props.source, (width, height) => {
-            this.setState({
-                width: containerWidth,
-                height: Math.min(containerWidth * Math.min((height / width), 1), height * 3)
-            });
-        },
-        (e) => {console.log(this.props.source)}
-        );
-    }
+    Image.getSize(this.props.source, (width, height) => {
+      this.setState({
+        width: containerWidth,
+        height: Math.min(containerWidth * Math.min((height / width), 1), height * 3)
+      });
+    },
+      (e) => { console.log(this.props.source) }
+    );
+  }
 
-    render() {
+  render() {
 
-        return (
-            <View style={{ flex: 1 }}>
-                <Image
-                    resizeMode='contain'
-                    source={this.props.source}
-                    style={{
-                        width: this.state.width,
-                        height: this.state.height,
-                        backgroundColor: '#d6d7da',
-                        borderColor: '#d6d7da'
-                    }} />
-            </View>
-        );
-    }
+    return (
+      <View style={{ flex: 1 }}>
+        <Image
+          resizeMode='contain'
+          source={this.props.source}
+          style={{
+            width: this.state.width,
+            height: this.state.height,
+            backgroundColor: '#d6d7da',
+            borderColor: '#d6d7da'
+          }} />
+      </View>
+    );
+  }
 }
 
 
 
 const PostRowExtraImagesSingle = (props) => (
-    <View style={styles.postBodyExtra}>
-        {props.photos.map((item, index) => {
-            console.log(typeof item)
-            return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><Image resizeMode="contain" source={{ uri: item }} style={styles.postBodyExtraPhotoSingle} /></View>
-            // return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><BodyExtraPhotoSingle source={{ uri: item }} /></View>
-        })}
-    </View>
+  <View style={styles.postBodyExtra}>
+    {props.photos.map((item, index) => {
+      console.log(typeof item);
+      return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><Image resizeMode="contain" source={{ uri: item }} style={styles.postBodyExtraPhotoSingle} /></View>
+      // return <View key={index} style={styles.postBodyExtraPhotoSingleFrame}><BodyExtraPhotoSingle source={{ uri: item }} /></View>
+    })}
+  </View>
 );
 
 const PostRowExtraImagesDouble = (props) => (
-    <View style={styles.postBodyExtra}>
-        {props.photos.map((item, index) => {
-            console.log(typeof item)
-            return <View key={index} style={styles.postBodyExtraPhotoDoubleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
-        })}
-    </View>
+  <View style={styles.postBodyExtra}>
+    {props.photos.map((item, index) => {
+      console.log(typeof item); ß
+      return <View key={index} style={styles.postBodyExtraPhotoDoubleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
+    })}
+  </View>
 );
 
 const PostRowExtraImagesTriple = (props) => (
-    <View style={styles.postBodyExtra}>
-        {props.photos.map((item, index) => {
-            console.log(typeof item)
-            return <View key={index} style={styles.postBodyExtraPhotoTripleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
-        })}
-    </View>
+  <View style={styles.postBodyExtra}>
+    {props.photos.map((item, index) => {
+      console.log(typeof item)
+      return <View key={index} style={styles.postBodyExtraPhotoTripleFrame}><Image source={{ uri: item }} style={styles.postBodyExtraPhotoMultiple} /></View>
+    })}
+  </View>
 );
 
 const PostRowExtraImages = (props) => {
-    if (props.photos.length == 0) {
-        return null;
-    } else if (props.photos.length == 1) {
-        return <PostRowExtraImagesSingle {...props} />;
-    } else if (props.photos.length == 2) {
-        return <PostRowExtraImagesDouble {...props} />;
-    } else if (props.photos.length == 4) {
-        return <PostRowExtraImagesDouble {...props} />;
-    } else {
-        return <PostRowExtraImagesTriple {...props} />;
-    }
+  if (props.photos.length == 0) {
+    return null;
+  } else if (props.photos.length == 1) {
+    return <PostRowExtraImagesSingle {...props} />;
+  } else if (props.photos.length == 2) {
+    return <PostRowExtraImagesDouble {...props} />;
+  } else if (props.photos.length == 4) {
+    return <PostRowExtraImagesDouble {...props} />;
+  } else {
+    return <PostRowExtraImagesTriple {...props} />;
+  }
 };
 
 
 
 export const PostRow = (props) => {
-    console.log(props.photos[0])
-    return (
-        <View style={styles.containerBorder}>
-            <View style={styles.container}>
-                <View style={styles.nameCard}>
-                    <Image source={{ uri: props.user_picture }} style={styles.nameCardphoto} />
-                    <View style={styles.nameCardTitle}>
-                        <Text style={styles.nameCardName}>
-                            {`${props.text}`}
-                        </Text>
-                        <Text style={styles.nameCardMetadata}>
-                            {`${props.timestamp}`}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.postBody}>
-                    <View style={styles.postBodyText}>
-                        <Text style={{}}>
-                            {`${props.text}`}
-                        </Text>
-                    </View>
-                    <PostRowExtraImages {...props} />
-                </View>
-                <View style={styles.postPanel}>
-                    <View style={styles.postPanelItem}>
-                        <Text style={{}}>
-                            Like
-                        </Text>
-                    </View>
-                    <View style={styles.postPanelItem}>
-                        <Text style={{}}>
-                            Comment
-                        </Text>
-                    </View>
-                    <View style={styles.postPanelItem}>
-                        <Text style={{}}>
-                            Share
-                        </Text>
-                    </View>
-                </View>
-            </View>
+  console.log(props.photos[0]);
+  return (
+    <View style={styles.containerBorder}>
+      <View style={styles.container}>
+        <View style={styles.nameCard}>
+          <Image source={{ uri: props.user_picture }} style={styles.nameCardphoto} />
+          <View style={styles.nameCardTitle}>
+            <Text style={styles.nameCardName}>
+              {`${props.text}`}
+            </Text>
+            <Text style={styles.nameCardMetadata}>
+              {`${props.timestamp}`}
+            </Text>
+          </View>
         </View>
-    )
+        <View style={styles.postBody}>
+          <View style={styles.postBodyText}>
+            <Text style={{}}>
+              {`${props.text}`}
+            </Text>
+          </View>
+          <PostRowExtraImages {...props} />
+        </View>
+        <View style={styles.postPanel}>
+          <View style={styles.postPanelItem}>
+            <Text style={{}}>
+              Like
+                        </Text>
+          </View>
+          <View style={styles.postPanelItem}>
+            <Text style={{}}>
+              Comment
+                        </Text>
+          </View>
+          <View style={styles.postPanelItem}>
+            <Text style={{}}>
+              Share
+                        </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
 };
